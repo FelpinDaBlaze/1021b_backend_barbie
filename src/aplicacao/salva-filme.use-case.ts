@@ -1,29 +1,24 @@
-import { describe, expect, test } from 'vitest';
+export default class SalvaFilme {
+    private repositorio
+    constructor(repositorio) {
+        this.repositorio = repositorio
+    }
+    public execute(input:Input):Output {
+        const {id,titulo,descricao,imagem} = input
+        return this.repositorio.salvar({id,titulo,descricao,imagem})
+    }
+}
 
-import SalvaFilme from './salva-filme.use-case';
+type Input = {
+    id:number,
+    titulo:string,
+    descricao:string,
+    imagem:string
+}
 
-describe('Testando salva filme use case', () => {
-    test('deve salvar um filme', () => {
-
-        const salvaFilme = new SalvaFilme();
-        
-        const input = {
-            id: 1,
-            titulo: 'test',
-            descricao: 'test',
-            imagem: 'test'
-        };
-
-        const resultado = salvaFilme.execute(input);
-
-        expect(resultado).toEqual(input);
-    });
-});
-
-
-type AltInput = {
-    id: number,
-    titulo: string,
-    descricao: string,
-    imagem: string
+type Output = {
+    id:number,
+    titulo:string,
+    descricao:string,
+    imagem:string
 }

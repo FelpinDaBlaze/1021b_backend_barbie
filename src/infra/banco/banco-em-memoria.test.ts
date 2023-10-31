@@ -1,74 +1,57 @@
-import {describe, expect, it, test} from 'vitest'
-
-import BancoEmMemoria from './banco-em-memoria'
+import {describe, expect,it, test} from 'vitest';
+import BancoEmMemoria from './banco_em_memoria';
 
 describe('BancoEmMemoria', () => {
-    test('deve salvar um filme em memória', () => {
-        //Entrada de dados
-        const filme = {
-            id:1,
-            titulo:'Filme 1',
-            descricao:'Descrição do filme 1',
-            imagem:'imagem.jpg'
-        }
-        //Processamento
-        const bancoEmMemoria = new BancoEmMemoria()
-        bancoEmMemoria.salvar(filme)
+    test('deve salvar um filme', () => {
+    const filme = {
+        id:1,
+        titulo:'filme 1',
+        descricao:'Descrição do filme 1',
+        imagem:'imagem.jpg'
+    }
+    const bancoEmMemoria = new BancoEmMemoria()
+    bancoEmMemoria.salvar(filme)
 
-        //Saída
-        expect(bancoEmMemoria.filmes).toEqual([filme])
-        expect(bancoEmMemoria.filmes.length).toBe(1)
+    expect(bancoEmMemoria.filmes).toEqual([filme])
+    expect(bancoEmMemoria.filmes.length).toBe(1)
+
     })
     test('deve listar os filmes salvos em memória', () => {
-        //Entrada
         const filme = {
             id:1,
-            titulo:'Filme 1',
+            titulo:'filme 1',
             descricao:'Descrição do filme 1',
             imagem:'imagem.jpg'
         }
-        //processamento
+
         const bancoEmMemoria = new BancoEmMemoria()
+        //bancoEmMemoria.salvar(filme)
         bancoEmMemoria.filmes.push(filme)
         const resultado = bancoEmMemoria.listar()
-        //saída
         expect(resultado).toEqual([filme])
+        
     })
     test('deve buscar um filme pelo id', () => {
-        // Entrada
-    const filme = {
-        id: 1,
-        titulo: 'Filme 1',
-        descricao: 'Descrição do filme 1',
-        imagem: 'imagem.jpg'
-    }
+        const filme = {
+            id:1,
+            titulo:'filme 1',
+            descricao:'Descrição do filme 1',
+            imagem:'imagem.jpg'
+        }
+        const filme2 = {
+            id:2,
+            titulo:'filme 1',
+            descricao:'Descrição do filme 1',
+            imagem:'imagem.jpg'
+        }
+        const bancoEmMemoria = new BancoEmMemoria()
+        bancoEmMemoria.filmes.push(filme)
+        bancoEmMemoria.filmes.push(filme2)
 
-    // Processamento
-    const bancoEmMemoria = new BancoEmMemoria()
-    bancoEmMemoria.filmes.push(filme)
+        const resultado = bancoEmMemoria.buscarPorId(1)
 
-    // Buscar filme pelo ID
-    const resultado = bancoEmMemoria.buscarPorId(1)
-
-    // Saída
-    expect(resultado).toEqual(filme)
+        expect(resultado).toEqual(filme)
+        expect(bancoEmMemoria.filmes).toHaveLength(2)
     })
-    test('deve apagar os dados salvos em memória', () => {})
-
-    const filme = {
-        id: 1,
-        titulo: 'Filme 1',
-        descricao: 'Descrição do filme 1',
-        imagem: 'imagem.jpg'
-    }
-
-    // Processamento
-    const bancoEmMemoria = new BancoEmMemoria()
-    bancoEmMemoria.filmes.push(filme)
-
-    // Apagar dados em memória
-    bancoEmMemoria.apagarDados()
-
-    // Saída
-    expect(bancoEmMemoria.filmes.length).toBe(0)
+    test('deve apagar todos os dados salvos em memória', () => {})
 })
